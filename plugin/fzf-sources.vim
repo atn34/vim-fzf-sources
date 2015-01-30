@@ -10,8 +10,9 @@ function! TagCommand()
 endfunction
 
 command! FZFTags call fzf#run({
-\   'source'     : TagCommand(),
+\   'options'    : '-x',
 \   'sink'       : 'tag',
+\   'source'     : TagCommand(),
 \   'tmux_height': '40%',
 \ })
 
@@ -28,8 +29,9 @@ function! MarkOpen(m)
 endfunction
 
 command! FZFMarks call fzf#run({
-\   'source'     : MarkList(),
+\   'options'    : '-x',
 \   'sink'       : function('MarkOpen'),
+\   'source'     : MarkList(),
 \   'tmux_height': '40%',
 \ })
 
@@ -46,35 +48,37 @@ function! BufOpen(e)
 endfunction
 
 command! FZFBuffers call fzf#run({
-\   'source'     : reverse(BufList()),
+\   'options'    : '-x',
 \   'sink'       : function('BufOpen'),
+\   'source'     : reverse(BufList()),
 \   'tmux_height': '40%',
 \ })
 
 command! FZFFiles call fzf#run({
-\   'source'     : 'ag -l -g ""',
+\   'options'    : '-m -x',
 \   'sink'       : 'edit',
-\   'options'    : '-m',
+\   'source'     : 'ag -l -g ""',
 \   'tmux_height': '40%',
 \ })
 
 command! FZFMru call fzf#run({
-\   'source'     : v:oldfiles,
+\   'options'    : '-m --no-sort -x',
 \   'sink'       : 'edit',
-\   'options'    : '-m',
+\   'source'     : reverse(copy(v:oldfiles)),
 \   'tmux_height': '40%',
 \ })
 
 command! FZFGitFiles call fzf#run({
-\   'source'     : 'git ls-files',
+\   'options'    : '-m -x',
 \   'sink'       : 'edit',
-\   'options'    : '-m',
+\   'source'     : 'git ls-files',
 \   'tmux_height': '40%',
 \ })
 
 command! FZFCd call fzf#run({
-\   'source'     : 'find * -path "*/.*" -type d -prune -o -type d',
+\   'options'    : '-x',
 \   'sink'       : 'cd',
+\   'source'     : 'find * -path "*/.*" -type d -prune -o -type d',
 \   'tmux_height': '40%',
 \ })
 
