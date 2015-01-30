@@ -5,8 +5,7 @@ else
 endif
 
 function! TagCommand()
-  return substitute('awk _!/^!/ { print \$1 }_ ', '_', "'", 'g')
-              \ . join(tagfiles() + ['/dev/null'], ' ')
+  return 'awk ''!/^!/ { print \$1 }'' ' . join(tagfiles() + ['/dev/null'], ' ')
 endfunction
 
 command! FZFTags call fzf#run({
