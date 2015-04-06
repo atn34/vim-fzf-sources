@@ -63,7 +63,7 @@ command! FZFFiles call fzf#run({
 command! FZFMru call fzf#run({
 \   'options'    : '-m --no-sort -x',
 \   'sink'       : 'edit',
-\   'source'     : filter(copy(v:oldfiles), 'v:val !~# "^fugitive:///"'),
+\   'source'     : filter(copy(v:oldfiles), 'v:val !~# "^fugitive:///\\|fugitiveblame$"'),
 \   'tmux_height': '40%',
 \ })
 
